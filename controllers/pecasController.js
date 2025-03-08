@@ -24,6 +24,17 @@ class PecasController {
     }
   }
 
+  async criarPeca(req, res) {
+    const newPeca = req.body;
+    try {
+      const resposta = await pecasModel.criar(newPeca);
+      return res.status(200).json(resposta);
+    } catch (erro) {
+      console.error("Erro ao buscar pecas na rota /pecas:", erro);
+      return res.status(500).json({ sucesso: false, erro: erro.message });
+    }
+  }
+
   async putMovEstoque(req, res) {
     const { id } = req.params;
     const newQtd = req.body;

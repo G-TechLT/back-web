@@ -58,10 +58,10 @@ class ServicosModel {
     return this.executaQuery(sql, [newValue, id]);
   }
 
-  // criar(novoAtendimento) {
-  //   const sql = "INSERT INTO atendimentos SET ?";
-  //   return this.executaQuery(sql, novoAtendimento);
-  // }
+  criar(novaPecas) {
+    const sql = "INSERT INTO pecas SET ?";
+    return this.executaQuery(sql, novaPecas);
+  }
 
   // atualizar(atendimentoAtualizar, id) {
   //   const sql = "UPDATE atendimentos SET ? WHERE id = ?";

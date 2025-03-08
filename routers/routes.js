@@ -3,6 +3,8 @@ const router = Router();
 const equipamentoController = require("../controllers/equipamentoController");
 const pecasController = require("../controllers/pecasController");
 const servicosController = require("../controllers/servicosController");
+const prodTransmissor = require("../controllers/produtoTransmController");
+const prodPosi = require("../controllers/produtoPosiController");
 const pecaServicoController = require("../controllers/pecaServicoController");
 const clienteController = require("../controllers/clienteController");
 
@@ -21,6 +23,8 @@ router.put("/pecas/:id", pecasController.putMovEstoque);
 
 router.post("/servicos", servicosController.newService);
 
+router.post("/novasPecas", pecasController.criarPeca);
+
 router.get("/servicos/:id", pecasController.pecaCodService);
 
 router.put("/servicos/:id", pecasController.putCodService);
@@ -32,5 +36,9 @@ router.post("/pecaServico", pecaServicoController.newPecaService);
 router.get("/clientes/:id", clienteController.buscarClientesId);
 
 router.get("/clientes", clienteController.buscarClientes);
+
+router.post("/prodTransmissor", prodTransmissor.novoProd);
+
+router.post("/prodPosicionador", prodPosi.novoProd);
 
 module.exports = router;
