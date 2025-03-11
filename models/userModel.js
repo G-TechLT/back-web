@@ -13,9 +13,9 @@ class UserModel {
     });
   }
 
-  buscarUsers(email) {
-    const sql = "Select * from usuarios where Email = ?";
-    return this.executaQuery(sql, email);
+  buscarUsers(email, senha) {
+    const sql = `SELECT * FROM usuarios WHERE Email = ? AND Senha = ?`;
+    return this.executaQuery(sql, [email, senha]);
   }
 
   // atualizar(atendimentoAtualizar, id) {

@@ -24,7 +24,7 @@ router.put("/pecas/:id", pecasController.putMovEstoque);
 
 router.post("/servicos", servicosController.newService);
 
-router.post("/usuarios/login", userController.buscar);
+router.post("/usuarios/login", userController.buscarUsers);
 
 router.post("/novasPecas", pecasController.criarPeca);
 

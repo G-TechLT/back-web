@@ -4,28 +4,39 @@ const jwt = require("jsonwebtoken");
 const secretKey = "dkjasdhkj32khu4khj32jnksdahf1kjdas";
 
 class UserController {
-  async buscar(req, res) {
-    try {
-      const resposta = await userModel.buscarUsers(req.body.email);
+  async buscarUsers(req, res) {
+    const { Email, Senha } = req.body;
 
-      if (!resposta) {
-        return res
-          .status(404)
-          .json({ sucesso: false, mensagem: "Usuário não encontrado" });
+    try {
+      if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).json({
+          sucesso: false,
+          erro: "Dados do serviço não fornecidos",
+        });
       }
 
-      // Generate JWT
+      const resposta = await userModel.buscarUsers(Email, Senha);
+
+      if (resposta == [] || resposta.length === 0) {
+        return res.status(400).json({
+          sucesso: false,
+          erro: "Usuário não encontrado",
+        });
+      }
+
       const token = jwt.sign(
         { email: resposta.email, id: resposta.id },
         secretKey,
         {
-          expiresIn: "1h", // Token expiration time
+          expiresIn: "1h",
         }
       );
 
-      return res.status(200).json({ sucesso: true, value: resposta, token });
+      return res
+        .status(200)
+        .json({ sucesso: true, value: resposta, token: token });
     } catch (erro) {
-      console.error("Erro ao buscar equipamento:", erro);
+      console.error("Erro user:", erro);
       return res.status(500).json({ sucesso: false, erro: erro.message });
     }
   }
