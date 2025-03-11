@@ -7,6 +7,7 @@ const prodTransmissor = require("../controllers/produtoTransmController");
 const prodPosi = require("../controllers/produtoPosiController");
 const pecaServicoController = require("../controllers/pecaServicoController");
 const clienteController = require("../controllers/clienteController");
+const userController = require("../controllers/userController");
 
 //req = requisição, recebe algo
 //res = resposta, envia algo
@@ -22,6 +23,8 @@ router.get("/pecas", pecasController.allPecas);
 router.put("/pecas/:id", pecasController.putMovEstoque);
 
 router.post("/servicos", servicosController.newService);
+
+router.post("/usuarios/login", userController.buscar);
 
 router.post("/novasPecas", pecasController.criarPeca);
 
