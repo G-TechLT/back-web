@@ -24,27 +24,23 @@ class ServicosModel {
   }
 
   filtrarPecaCodService(id) {
-    const sql = `SELECT 
-        sp.codService,
-        sp.peca_id,
-        sp.quantidade_peca,
-        sp.idCliente,
-        p.ItemID,
-        p.Carcaca,
-        p.Visor,
-        p.Quantidade,
-        p.Descricao,
-        p.valorPeca,
-        s.modelo,
-        s.categoria
-    FROM
-        servicos_pecas sp
-            JOIN
-        pecas p ON sp.peca_id = p.ID
-            JOIN
-        servicos s ON sp.codService = s.codService
-    WHERE
-        sp.codService = '${id}'`;
+    const sql = `SELECT DISTINCT
+      sp.codService,
+      sp.peca_id,
+      sp.quantidade_peca,
+      sp.idCliente,
+      sp.itemService,
+      p.ItemID,
+      p.Carcaca,
+      p.Visor,
+      p.Quantidade,
+      p.Descricao,
+      p.valorPeca,
+      s.modelo
+    FROM servicos_pecas sp
+    JOIN pecas p ON sp.peca_id = p.ID
+    JOIN servicos s ON sp.codService = s.codService
+    WHERE sp.codService = '${id}';`;
     return this.executaQuery(sql, id);
   }
 
