@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel.js");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const secretKey = "dkjasdhkj32khu4khj32jnksdahf1kjdas";
 
@@ -8,33 +9,42 @@ class UserController {
     const { Email, Senha } = req.body;
 
     try {
-      if (!req.body || Object.keys(req.body).length === 0) {
+      if (!Email || !Senha) {
         return res.status(400).json({
           sucesso: false,
-          erro: "Dados do serviço não fornecidos",
+          erro: "E-mail e senha são obrigatórios",
         });
       }
 
-      const resposta = await userModel.buscarUsers(Email, Senha);
+      const resposta = await userModel.buscarUsers(Email);
 
-      if (resposta == [] || resposta.length === 0) {
+      if (!resposta || resposta.length === 0) {
         return res.status(400).json({
           sucesso: false,
           erro: "Usuário não encontrado",
         });
       }
 
+      const usuario = resposta[0];
+
+      const senhaValida = await bcrypt.compare(Senha, usuario.Senha);
+
+      if (!senhaValida) {
+        return res.status(400).json({
+          sucesso: false,
+          erro: "Senha incorreta",
+        });
+      }
+
       const token = jwt.sign(
-        { email: resposta.email, id: resposta.id },
+        { Email: usuario.Email, id: usuario.ID },
         secretKey,
         {
           expiresIn: "1h",
         }
       );
 
-      return res
-        .status(200)
-        .json({ sucesso: true, value: resposta, token: token });
+      return res.status(200).json({ sucesso: true, usuario, token });
     } catch (erro) {
       console.error("Erro user:", erro);
       return res.status(500).json({ sucesso: false, erro: erro.message });
