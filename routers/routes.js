@@ -1,47 +1,49 @@
-const { Router } = require("express");
-const router = Router();
-const equipamentoController = require("../controllers/equipamentoController");
-const pecasController = require("../controllers/pecasController");
-const servicosController = require("../controllers/servicosController");
-const prodTransmissor = require("../controllers/produtoTransmController");
-const prodPosi = require("../controllers/produtoPosiController");
-const pecaServicoController = require("../controllers/pecaServicoController");
-const clienteController = require("../controllers/clienteController");
-const userController = require("../controllers/userController");
+const { Router } = require('express')
+const router = Router()
+const equipamentoController = require('../controllers/equipamentoController')
+const pecasController = require('../controllers/pecasController')
+const servicosController = require('../controllers/servicosController')
+const prodTransmissor = require('../controllers/produtoTransmController')
+const prodPosi = require('../controllers/produtoPosiController')
+const pecaServicoController = require('../controllers/pecaServicoController')
+const clienteController = require('../controllers/clienteController')
+const userController = require('../controllers/userController')
 
 //req = requisição, recebe algo
 //res = resposta, envia algo
 
-router.get("/equipamentos", equipamentoController.buscar);
+router.get('/equipamentos', equipamentoController.buscar)
 
-router.get("/equipamentos/:id", equipamentoController.buscarId);
+router.get('/equipamentos/:id', equipamentoController.buscarId)
 
-router.get("/pecas/:id", pecasController.pecasPorItemId);
+router.get('/pecas/:id', pecasController.pecasPorItemId)
 
-router.get("/pecas", pecasController.allPecas);
+router.get('/pecas', pecasController.allPecas)
 
-router.put("/pecas/:id", pecasController.putMovEstoque);
+router.put('/pecas/:id', pecasController.putMovEstoque)
 
-router.post("/servicos", servicosController.newService);
+router.post('/servicos', servicosController.newService)
 
-router.post("/usuarios/login", userController.buscarUsers);
+router.post('/usuarios/login', userController.buscarUsers)
 
-router.post("/novasPecas", pecasController.criarPeca);
+router.post('/novasPecas', pecasController.criarPeca)
 
-router.get("/servicos/:id", pecasController.pecaCodService);
+router.get('/servicos/:id', pecasController.pecaCodService)
 
-router.put("/servicos/:id", pecasController.putCodService);
+router.get('/servicosCodService/:id', servicosController.buscarCodService)
 
-router.get("/todosServicos", servicosController.buscar);
+router.put('/servicos/:id', pecasController.putCodService)
 
-router.post("/pecaServico", pecaServicoController.newPecaService);
+router.get('/todosServicos', servicosController.buscar)
 
-router.get("/clientes/:id", clienteController.buscarClientesId);
+router.post('/pecaServico', pecaServicoController.newPecaService)
 
-router.get("/clientes", clienteController.buscarClientes);
+router.get('/clientes/:id', clienteController.buscarClientesId)
 
-router.post("/prodTransmissor", prodTransmissor.novoProd);
+router.get('/clientes', clienteController.buscarClientes)
 
-router.post("/prodPosicionador", prodPosi.novoProd);
+router.post('/prodTransmissor', prodTransmissor.novoProd)
 
-module.exports = router;
+router.post('/prodPosicionador', prodPosi.novoProd)
+
+module.exports = router

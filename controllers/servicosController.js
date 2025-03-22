@@ -1,4 +1,4 @@
-const servicoModel = require("../models/servicoModel.js");
+const servicoModel = require('../models/servicoModel.js')
 
 class ServicoController {
   // Método para criar um novo serviço
@@ -8,35 +8,47 @@ class ServicoController {
       if (!req.body || Object.keys(req.body).length === 0) {
         return res.status(400).json({
           sucesso: false,
-          erro: "Dados do serviço não fornecidos",
-        });
+          erro: 'Dados do serviço não fornecidos',
+        })
       }
 
-      const resposta = await servicoModel.criarServico(req.body);
+      const resposta = await servicoModel.criarServico(req.body)
 
       return res.status(201).json({
         sucesso: true,
-        mensagem: "Serviço criado com sucesso",
+        mensagem: 'Serviço criado com sucesso',
         dados: resposta,
-      });
+      })
     } catch (erro) {
-      console.error("Erro ao criar serviço AQUI:", erro);
+      console.error('Erro ao criar serviço AQUI:', erro)
       return res.status(500).json({
         sucesso: false,
         erro: erro.message,
-      });
+      })
     }
   }
 
   async buscar(req, res) {
     try {
-      const resposta = await servicoModel.listar();
-      return res.status(200).json(resposta);
+      const resposta = await servicoModel.listar()
+      return res.status(200).json(resposta)
     } catch (erro) {
-      console.error("Erro ao buscar equipamento:", erro);
-      return res.status(500).json({ sucesso: false, erro: erro.message });
+      console.error('Erro ao buscar equipamento:', erro)
+      return res.status(500).json({ sucesso: false, erro: erro.message })
+    }
+  }
+
+  async buscarCodService(req, res) {
+    const { id } = req.params
+
+    try {
+      const resposta = await servicoModel.serviceCodService(id)
+      return res.status(200).json(resposta)
+    } catch (erro) {
+      console.error('Erro ao buscar equipamento:', erro)
+      return res.status(500).json({ sucesso: false, erro: erro.message })
     }
   }
 }
 
-module.exports = new ServicoController();
+module.exports = new ServicoController()

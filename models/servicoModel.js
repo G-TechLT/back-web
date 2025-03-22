@@ -1,16 +1,16 @@
-const conexao = require("../conexao.js");
+const conexao = require('../conexao.js')
 
 class ServicoModel {
   executaQuery(sql, parametros) {
     return new Promise((res, rej) => {
       conexao.query(sql, parametros, (error, results) => {
         if (error) {
-          console.log("Erro na query AQUI: " + error);
-          return rej(error);
+          console.log('Erro na query AQUI: ' + error)
+          return rej(error)
         }
-        return res(results);
-      });
-    });
+        return res(results)
+      })
+    })
   }
 
   //   filtrarPecaItemId(id) {
@@ -20,13 +20,18 @@ class ServicoModel {
   //   }
 
   listar() {
-    const sql = "SELECT * FROM servicos";
-    return this.executaQuery(sql, "");
+    const sql = 'SELECT * FROM servicos'
+    return this.executaQuery(sql, '')
   }
 
   criarServico(novoServico) {
-    const sql = "INSERT INTO servicos SET ?";
-    return this.executaQuery(sql, novoServico);
+    const sql = 'INSERT INTO servicos SET ?'
+    return this.executaQuery(sql, novoServico)
+  }
+
+  serviceCodService(codService) {
+    const sql = 'SELECT * FROM servicos WHERE codService = ?'
+    return this.executaQuery(sql, codService)
   }
 
   // atualizar(atendimentoAtualizar, id) {
@@ -40,4 +45,4 @@ class ServicoModel {
   // }
 }
 
-module.exports = new ServicoModel();
+module.exports = new ServicoModel()
