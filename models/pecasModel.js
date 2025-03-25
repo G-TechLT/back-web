@@ -32,6 +32,7 @@ class ServicosModel {
       sp.itemService,
       sp.insVisual,
       sp.manuPreventiva,
+      sp.manuPrevTomada,
       p.ItemID,
       p.Carcaca,
       p.Visor,
