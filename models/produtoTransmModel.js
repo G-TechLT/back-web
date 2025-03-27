@@ -1,26 +1,26 @@
-const conexao = require("../conexao.js");
+const conexao = require('../conexao.js')
 
 class ProdTransmModel {
   executaQuery(sql, parametros) {
     return new Promise((res, rej) => {
       conexao.query(sql, parametros, (error, results) => {
         if (error) {
-          console.log("Erro na query: " + error);
-          return rej(error);
+          console.log('Erro na query: ' + error)
+          return rej(error)
         }
-        return res(results);
-      });
-    });
+        return res(results)
+      })
+    })
   }
 
   listar() {
-    const sql = "SELECT * FROM produtos_transmissor";
-    return this.executaQuery(sql, "");
+    const sql = 'SELECT * FROM produto_transmissor'
+    return this.executaQuery(sql, '')
   }
 
   criar(novoProduto) {
-    const sql = "INSERT INTO produto_transmissor SET ?";
-    return this.executaQuery(sql, novoProduto);
+    const sql = 'INSERT INTO produto_transmissor SET ?'
+    return this.executaQuery(sql, novoProduto)
   }
 
   // atualizar(atendimentoAtualizar, id) {
@@ -34,4 +34,4 @@ class ProdTransmModel {
   // }
 }
 
-module.exports = new ProdTransmModel();
+module.exports = new ProdTransmModel()

@@ -64,8 +64,6 @@ class PecasController {
     const { id } = req.params
     const serviceAtt = req.body
 
-    console.log(serviceAtt)
-
     try {
       const columnName = Object.keys(serviceAtt)[0]
       const newValue = Object.values(serviceAtt)[0]

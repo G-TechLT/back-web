@@ -8,6 +8,7 @@ const prodPosi = require('../controllers/produtoPosiController')
 const pecaServicoController = require('../controllers/pecaServicoController')
 const clienteController = require('../controllers/clienteController')
 const userController = require('../controllers/userController')
+const vendaController = require('../controllers/vendaController')
 
 //req = requisição, recebe algo
 //res = resposta, envia algo
@@ -44,6 +45,14 @@ router.get('/clientes', clienteController.buscarClientes)
 
 router.post('/prodTransmissor', prodTransmissor.novoProd)
 
+router.get('/produtosTransmissor', prodTransmissor.buscarProdTransmissor)
+
+router.put('/novaVenda/:id', prodTransmissor.putPrdTrm)
+
 router.post('/prodPosicionador', prodPosi.novoProd)
+
+router.get('/todasVendas', vendaController.buscarTodos)
+
+router.get('/vendas/:id', vendaController.buscarClientesId)
 
 module.exports = router
