@@ -49,6 +49,7 @@ class VendaModel {
       WHEN v.tipoProduto = '2' THEN pp.preco
       ELSE NULL
     END AS preco
+    
     FROM vendas v
     JOIN clientes c ON v.idCliente = c.id
     LEFT JOIN produto_transmissor pt ON v.tipoProduto = '1' AND v.idProduto = pt.id
