@@ -32,7 +32,7 @@ class VendaController {
     const { status } = req.body
 
     try {
-      console.log(id, status)
+      // console.log(id, status)
       const resposta = await vendaModel.attStatus(status, id)
       return res.status(200).json(resposta)
     } catch (erro) {
