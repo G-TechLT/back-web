@@ -49,6 +49,8 @@ router.get('/produtosTransmissor', prodTransmissor.buscarProdTransmissor)
 
 router.put('/novaVenda/:id', prodTransmissor.putPrdTrm)
 
+router.put('/attStatus/:id', vendaController.attStatus)
+
 router.get('/produtosPosicionador', prodPosi.buscarPosicionador)
 
 router.post('/prodPosicionador', prodPosi.novoProd)

@@ -27,6 +27,20 @@ class VendaController {
     }
   }
 
+  async attStatus(req, res) {
+    const { id } = req.params
+    const { status } = req.body
+
+    try {
+      console.log(id, status)
+      const resposta = await vendaModel.attStatus(status, id)
+      return res.status(200).json(resposta)
+    } catch (erro) {
+      console.error('Erro ao atualizar status:', erro)
+      return res.status(500).json({ sucesso: false, erro: erro.message })
+    }
+  }
+
   async newVenda(req, res) {
     try {
       const vendas = req.body

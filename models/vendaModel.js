@@ -92,10 +92,10 @@ LEFT JOIN clientes c ON c.id = v.idCliente;`
     return this.executaQuery(sql, novaVenda)
   }
 
-  // atualizar(atendimentoAtualizar, id) {
-  //   const sql = "UPDATE atendimentos SET ? WHERE id = ?";
-  //   return this.executaQuery(sql, [atendimentoAtualizar, id]);
-  // }
+  attStatus(attVenda, id) {
+    const sql = 'UPDATE vendas SET status = ? WHERE idVenda = ?'
+    return this.executaQuery(sql, [attVenda, id])
+  }
 
   // deletar(id) {
   //   const sql = "DELETE FROM atendimentos WHERE id = ?";
