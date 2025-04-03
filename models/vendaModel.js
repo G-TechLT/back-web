@@ -93,7 +93,6 @@ LEFT JOIN clientes c ON c.id = v.idCliente;`
   }
 
   attStatus(attVenda, id) {
-    console.log(id, attVenda)
     const sql = 'UPDATE vendas SET status = ? WHERE idVenda = ?'
     return this.executaQuery(sql, [attVenda, id])
   }

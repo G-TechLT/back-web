@@ -1,8 +1,8 @@
-const userModel = require("../models/userModel.js");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const userModel = require('../models/userModel.js');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
-const secretKey = "dkjasdhkj32khu4khj32jnksdahf1kjdas";
+const secretKey = 'dkjasdhkj32khu4khj32jnksdahf1kjdas';
 
 class UserController {
   async buscarUsers(req, res) {
@@ -12,7 +12,7 @@ class UserController {
       if (!Email || !Senha) {
         return res.status(400).json({
           sucesso: false,
-          erro: "E-mail e senha são obrigatórios",
+          erro: 'E-mail e senha são obrigatórios',
         });
       }
 
@@ -21,7 +21,7 @@ class UserController {
       if (!resposta || resposta.length === 0) {
         return res.status(400).json({
           sucesso: false,
-          erro: "Usuário não encontrado",
+          erro: 'Usuário não encontrado',
         });
       }
 
@@ -32,7 +32,7 @@ class UserController {
       if (!senhaValida) {
         return res.status(400).json({
           sucesso: false,
-          erro: "Senha incorreta",
+          erro: 'Senha incorreta',
         });
       }
 
@@ -40,13 +40,13 @@ class UserController {
         { Email: usuario.Email, id: usuario.ID },
         secretKey,
         {
-          expiresIn: "1h",
+          expiresIn: '1h',
         }
       );
 
       return res.status(200).json({ sucesso: true, usuario, token });
     } catch (erro) {
-      console.error("Erro user:", erro);
+      console.error('Erro user:', erro);
       return res.status(500).json({ sucesso: false, erro: erro.message });
     }
   }
