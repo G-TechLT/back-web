@@ -1,11 +1,11 @@
-const conexao = require("../conexao.js");
+const conexao = require('../conexao.js');
 
 class ClienteModel {
   executaQuery(sql, parametros) {
     return new Promise((res, rej) => {
       conexao.query(sql, parametros, (error, results) => {
         if (error) {
-          console.log("Erro na query: " + error);
+          console.log('Erro na query: ' + error);
           return rej(error);
         }
         return res(results);
@@ -14,13 +14,18 @@ class ClienteModel {
   }
 
   listar() {
-    const sql = "SELECT * FROM clientes";
-    return this.executaQuery(sql, "");
+    const sql = 'SELECT * FROM clientes';
+    return this.executaQuery(sql, '');
   }
 
   listarIdCliente(id) {
     const sql = `SELECT * FROM clientes WHERE id = ${id}`;
     return this.executaQuery(sql, id);
+  }
+
+  inserirCliente(novoCliente) {
+    const sql = 'INSERT INTO clientes SET ?';
+    return this.executaQuery(sql, novoCliente);
   }
 
   // criar(novoAtendimento) {
