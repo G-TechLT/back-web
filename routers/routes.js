@@ -49,6 +49,8 @@ router.post('/prodTransmissor', prodTransmissor.novoProd);
 
 router.get('/produtosTransmissor', prodTransmissor.buscarProdTransmissor);
 
+router.put('/qtdProdutosTransmissor/:id', prodTransmissor.confirmarVenda);
+
 router.put('/novaVenda/:id', prodTransmissor.putPrdTrm);
 
 router.put('/attStatus/:id', vendaController.attStatus);
