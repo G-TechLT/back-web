@@ -5,11 +5,12 @@ const cors = require('cors');
 
 app.use(
   cors({
-    origin: 'https://concert-psi.vercel.app/',
+    origin: 'https://concert-psi.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   })
 );
+
 router(app, express);
 
 app.listen(3001, (error) => {
