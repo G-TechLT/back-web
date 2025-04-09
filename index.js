@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
+require('dotenv').config(); // <-- Aqui!
+
 const router = require('./routers/index.js');
 const cors = require('cors');
 
 app.use(
   cors({
-    origin: 'https://concert-psi.vercel.app',
+    // origin: 'https://concert-psi.vercel.app',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   })

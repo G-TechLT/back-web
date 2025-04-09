@@ -37,7 +37,7 @@ class UserController {
         maxAge: 60 * 60 * 1000, // 1 hora
       });
 
-      return res.status(200).json({ sucesso: true, usuario });
+      return res.status(200).json({ sucesso: true, usuario, token });
     } catch (erro) {
       console.error('Erro user:', erro);
       return res.status(500).json({ sucesso: false, erro: erro.message });
