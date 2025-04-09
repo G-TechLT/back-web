@@ -7,11 +7,7 @@ const cors = require('cors');
 
 app.use(
   cors({
-    origin: [
-      'https://back-web-mu.vercel.app',
-      'https://concert-psi.vercel.app',
-      'http://localhost:3000',
-    ],
+    origin: ['https://concert-psi.vercel.app', 'http://localhost:3000'],
     // origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
@@ -20,7 +16,7 @@ app.use(
 
 router(app, express);
 
-const PORT = process.env.PORT || 34999;
+const PORT = 3001;
 
 app.listen(PORT, (error) => {
   if (error) {

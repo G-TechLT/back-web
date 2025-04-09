@@ -1,6 +1,6 @@
 const userModel = require('../models/userModel.js');
-const bcrypt = require('bcrypt');
-const { gerarToken } = require('./authController'); // ou caminho relativo correto
+const bcrypt = require('bcryptjs'); // Use bcryptjs se estiver tendo erro no Railway
+const { gerarToken } = require('./authController'); // Ajuste o caminho se necessário
 
 class UserController {
   async buscarUsers(req, res) {
@@ -8,25 +8,29 @@ class UserController {
 
     try {
       if (!Email || !Senha) {
-        return res
-          .status(400)
-          .json({ sucesso: false, erro: 'E-mail e senha são obrigatórios' });
+        return res.status(400).json({
+          sucesso: false,
+          erro: 'E-mail e senha são obrigatórios',
+        });
       }
 
       const resposta = await userModel.buscarUsers(Email);
+
       if (!resposta || resposta.length === 0) {
-        return res
-          .status(400)
-          .json({ sucesso: false, erro: 'Usuário não encontrado' });
+        return res.status(404).json({
+          sucesso: false,
+          erro: 'Usuário não encontrado',
+        });
       }
 
       const usuario = resposta[0];
-      const senhaValida = await bcrypt.compare(Senha, usuario.Senha);
+      const senhaValida = await bcrypt.compare(String(Senha), usuario.Senha);
 
       if (!senhaValida) {
-        return res
-          .status(400)
-          .json({ sucesso: false, erro: 'Senha incorreta' });
+        return res.status(401).json({
+          sucesso: false,
+          erro: 'Senha incorreta',
+        });
       }
 
       const token = gerarToken(usuario);
@@ -34,13 +38,21 @@ class UserController {
       res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
         maxAge: 60 * 60 * 1000, // 1 hora
       });
 
-      return res.status(200).json({ sucesso: true, usuario, token });
+      return res.status(200).json({
+        sucesso: true,
+        usuario,
+        token,
+      });
     } catch (erro) {
-      console.error('Erro user:', erro);
-      return res.status(500).json({ sucesso: false, erro: erro.message });
+      console.error('Erro ao buscar usuário:', erro);
+      return res.status(500).json({
+        sucesso: false,
+        erro: 'Erro interno do servidor',
+      });
     }
   }
 }
