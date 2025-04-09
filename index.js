@@ -7,8 +7,8 @@ const cors = require('cors');
 
 app.use(
   cors({
-    // origin: 'https://concert-psi.vercel.app',
-    origin: 'http://localhost:3000',
+    origin: 'https://concert-psi.vercel.app',
+    // origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   })
