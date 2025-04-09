@@ -1,11 +1,11 @@
 const mysql = require('mysql2');
 
 const conexao = mysql.createConnection({
-  host: 'localhost',
+  host: 'metro.proxy.rlwy.net',
   port: 3306,
   user: 'root',
-  password: 'Farias!123',
-  database: 'nome_do_banco',
+  password: 'EpcYqAbewfLjZIhNXuNCaAvBuMYHjxDp',
+  database: 'railway',
 });
 
 module.exports = conexao;
