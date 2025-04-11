@@ -26,15 +26,15 @@ router.put('/pecas/:id', pecasController.putMovEstoque);
 router.post('/servicos', servicosController.newService);
 
 router.post('/usuarios/login', userController.buscarUsers);
-// router.post('/logout', (req, res) => {
-//   res.clearCookie('token', {
-//     httpOnly: true,
-//     secure: true,
-//     sameSite: 'none',
-//   });
+router.post('/logout', (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  });
 
-//   res.status(200).json({ sucesso: true, mensagem: 'Logout efetuado' });
-// });
+  res.status(200).json({ sucesso: true, mensagem: 'Logout efetuado' });
+});
 
 router.post('/novasPecas', pecasController.criarPeca);
 
