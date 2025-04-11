@@ -37,15 +37,19 @@ class UserController {
 
       res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Só envia via HTTPS em produção
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Use 'none' em produção se cross-origin
-        maxAge: 3600000, // 1 hora em milissegundos
-        path: '/', // Disponível em todo o site
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 3600000,
+        path: '/',
       });
 
       return res.status(200).json({
         sucesso: true,
         usuario,
+        value: {
+          token,
+          expiration: new Date(Date.now() + 1000 * 60 * 60 * 1),
+        },
       });
     } catch (erro) {
       console.error('Erro ao buscar usuário:', erro);
