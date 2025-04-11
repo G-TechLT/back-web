@@ -35,11 +35,10 @@ class UserController {
         { expiresIn: '1h' }
       );
 
-      // Configurar o cookie com o token
       res.cookie('token', token, {
-        httpOnly: true, // Impede acesso via JavaScript no cliente
+        httpOnly: true,
         secure: process.env.NODE_ENV === 'production', // Só envia via HTTPS em produção
-        sameSite: 'strict', // Proteção contra CSRF
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Use 'none' em produção se cross-origin
         maxAge: 3600000, // 1 hora em milissegundos
         path: '/', // Disponível em todo o site
       });
