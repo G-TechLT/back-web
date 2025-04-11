@@ -27,6 +27,16 @@ router.post('/servicos', servicosController.newService);
 
 router.post('/usuarios/login', userController.buscarUsers);
 
+router.post('/logout', (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  });
+
+  res.status(200).json({ sucesso: true, mensagem: 'Logout efetuado' });
+});
+
 router.post('/novasPecas', pecasController.criarPeca);
 
 router.get('/servicos/:id', pecasController.pecaCodService);

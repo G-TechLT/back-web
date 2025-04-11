@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 
-// Pegando a variável de ambiente corretamente
 const SECRET_KEY = process.env.JWT_SECRET;
 
 function gerarToken(usuario) {

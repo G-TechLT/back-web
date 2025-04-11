@@ -1,6 +1,6 @@
 const userModel = require('../models/userModel.js');
-const bcrypt = require('bcryptjs'); // Use bcryptjs se estiver tendo erro no Railway
-const { gerarToken } = require('./authController'); // Ajuste o caminho se necessário
+const bcrypt = require('bcryptjs');
+const { gerarToken } = require('./authController');
 
 class UserController {
   async buscarUsers(req, res) {
@@ -38,20 +38,20 @@ class UserController {
       res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 1000, // 1 hora
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 60 * 60 * 1000,
       });
 
       return res.status(200).json({
         sucesso: true,
         usuario,
-        token,
+        ...(process.env.NODE_ENV !== 'production' && { token }),
       });
     } catch (erro) {
       console.error('Erro ao buscar usuário:', erro);
       return res.status(500).json({
         sucesso: false,
-        erro: 'Erro interno do servidor',
+        erro: erro.message,
       });
     }
   }
