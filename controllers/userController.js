@@ -36,7 +36,7 @@ class UserController {
       const token = gerarToken(usuario);
 
       res.cookie('token', token, {
-        httpOnly: true,
+        httpOnly: false,
         secure: true,
         sameSite: 'none',
         maxAge: 60 * 60 * 1000,
