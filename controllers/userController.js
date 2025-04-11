@@ -1,6 +1,5 @@
 const userModel = require('../models/userModel.js');
 const bcrypt = require('bcryptjs');
-const { gerarToken } = require('./authController');
 
 class UserController {
   async buscarUsers(req, res) {
@@ -33,19 +32,9 @@ class UserController {
         });
       }
 
-      const token = gerarToken(usuario);
-
-      res.cookie('token', token, {
-        httpOnly: false,
-        secure: true,
-        sameSite: 'none',
-        maxAge: 60 * 60 * 1000,
-      });
-
       return res.status(200).json({
         sucesso: true,
         usuario,
-        ...(process.env.NODE_ENV !== 'production' && { token }),
       });
     } catch (erro) {
       console.error('Erro ao buscar usuário:', erro);
