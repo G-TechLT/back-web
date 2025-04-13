@@ -1,26 +1,26 @@
-const conexao = require('../conexao.js')
+const conexao = require('../conexao.js');
 
 class ServicosModel {
   executaQuery(sql, parametros) {
     return new Promise((res, rej) => {
       conexao.query(sql, parametros, (error, results) => {
         if (error) {
-          console.log('Erro na query: ' + error)
-          return rej(error)
+          console.log('Erro na query: ' + error);
+          return rej(error);
         }
-        return res(results)
-      })
-    })
+        return res(results);
+      });
+    });
   }
 
   filtrarPecaItemId(id) {
-    const sql = `SELECT * FROM Pecas WHERE ItemId = ${id}`
-    return this.executaQuery(sql, id)
+    const sql = `SELECT * FROM pecas WHERE ItemId = ${id}`;
+    return this.executaQuery(sql, id);
   }
 
   allPecas() {
-    const sql = `SELECT * FROM Pecas`
-    return this.executaQuery(sql, '')
+    const sql = `SELECT * FROM pecas`;
+    return this.executaQuery(sql, '');
   }
 
   filtrarPecaCodService(id) {
@@ -44,23 +44,23 @@ class ServicosModel {
     FROM servicos_pecas sp
     JOIN pecas p ON sp.peca_id = p.ID
     JOIN servicos s ON sp.codService = s.codService
-    WHERE sp.codService = '${id}';`
-    return this.executaQuery(sql, id)
+    WHERE sp.codService = '${id}';`;
+    return this.executaQuery(sql, id);
   }
 
   putCodService(serviceAtt, newValue, id) {
-    const sql = `UPDATE servicos SET ?? = ? WHERE codService = ?`
-    return this.executaQuery(sql, [serviceAtt, newValue, id])
+    const sql = `UPDATE servicos SET ?? = ? WHERE codService = ?`;
+    return this.executaQuery(sql, [serviceAtt, newValue, id]);
   }
 
   putMovEstoque(newValue, id) {
-    const sql = `UPDATE pecas SET Quantidade = ? WHERE ID = ?`
-    return this.executaQuery(sql, [newValue, id])
+    const sql = `UPDATE pecas SET Quantidade = ? WHERE ID = ?`;
+    return this.executaQuery(sql, [newValue, id]);
   }
 
   criar(novaPecas) {
-    const sql = 'INSERT INTO pecas SET ?'
-    return this.executaQuery(sql, novaPecas)
+    const sql = 'INSERT INTO pecas SET ?';
+    return this.executaQuery(sql, novaPecas);
   }
 
   // atualizar(atendimentoAtualizar, id) {
@@ -74,4 +74,4 @@ class ServicosModel {
   // }
 }
 
-module.exports = new ServicosModel()
+module.exports = new ServicosModel();
