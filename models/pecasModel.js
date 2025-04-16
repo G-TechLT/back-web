@@ -24,27 +24,48 @@ class ServicosModel {
   }
 
   filtrarPecaCodService(id) {
-    const sql = `SELECT DISTINCT
+    const sql = `SELECT
+      sp.id AS servico_peca_id,
       sp.codService,
-      sp.peca_id,
       sp.quantidade_peca,
+      sp.servico_id,
       sp.idCliente,
-      sp.itemService,
       sp.insVisual,
       sp.manuPreventiva,
       sp.manuPrevTomada,
-      p.ItemID,
+      sp.itemService,
+      
+      -- Equipamento
+      e.ID AS equipamento_id,
+      e.ItemID AS equipamento_ItemID,
+      e.Descricao AS equipamento_Descricao,
+      e.Categoria,
+      e.DataCadastro AS equipamento_DataCadastro,
+      e.Modelo AS equipamento_Modelo,
+
+      -- Peça
+      p.ID AS peca_id,
+      p.ItemID AS peca_ItemID,
       p.Carcaca,
       p.Visor,
-      p.Quantidade,
-      p.Descricao,
+      p.NumeroItem,
+      p.Quantidade AS peca_Quantidade,
+      p.Descricao AS peca_Descricao,
+      p.Codigo,
+      p.Observacao,
+      p.DataCadastro AS peca_DataCadastro,
       p.valorPeca,
-      s.status,
-      s.modelo
+      p.nSeriePlaca,
+      p.protocolo,
+      p.nSerieSensor,
+      p.faixaSensor,
+      p.dataFabricacao,
+      p.modeloPlaca
+
     FROM servicos_pecas sp
-    JOIN pecas p ON sp.peca_id = p.ID
-    JOIN servicos s ON sp.codService = s.codService
-    WHERE sp.codService = '${id}';`;
+    LEFT JOIN equipamentos e ON sp.equipamentoId = e.ID
+    LEFT JOIN pecas p ON sp.peca_id = p.ID
+    WHERE sp.codService = '${id}'`;
     return this.executaQuery(sql, id);
   }
 
