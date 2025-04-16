@@ -19,6 +19,10 @@ class UserController {
           erro: 'Usuário não encontrado',
         });
       }
+
+      // const hash = await bcrypt.hash(Senha, 10);
+      // console.log(hash);
+
       const usuario = resposta[0];
       const senhaValida = await bcrypt.compare(String(Senha), usuario.Senha);
       if (!senhaValida) {
