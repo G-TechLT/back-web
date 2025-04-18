@@ -1,16 +1,16 @@
-const conexao = require('../conexao.js')
+const conexao = require('../conexao.js');
 
 class VendaModel {
   executaQuery(sql, parametros) {
     return new Promise((res, rej) => {
       conexao.query(sql, parametros, (error, results) => {
         if (error) {
-          console.log('Erro na query AQUI: ' + error)
-          return rej(error)
+          console.log('Erro na query AQUI: ' + error);
+          return rej(error);
         }
-        return res(results)
-      })
-    })
+        return res(results);
+      });
+    });
   }
 
   //   filtrarPecaItemId(id) {
@@ -30,6 +30,7 @@ class VendaModel {
   v.status,
   v.marca,
   v.idProduto,
+  v.quantidade,
   c.id AS idCliente,
   c.nome AS nomeCliente,
   c.cnpj,
@@ -52,8 +53,8 @@ class VendaModel {
 FROM vendas v
 LEFT JOIN produto_transmissor pt ON pt.id = v.idProduto AND v.tipoProduto = 'Transmissor'
 LEFT JOIN produto_posicionador pp ON pp.id = v.idProduto AND v.tipoProduto = 'Posicionador'
-LEFT JOIN clientes c ON c.id = v.idCliente;`
-    return this.executaQuery(sql, '')
+LEFT JOIN clientes c ON c.id = v.idCliente;`;
+    return this.executaQuery(sql, '');
   }
 
   listarVendaId(id) {
@@ -83,18 +84,18 @@ LEFT JOIN clientes c ON c.id = v.idCliente;`
       LEFT JOIN produto_posicionador pp ON v.tipoProduto = '2' AND v.idProduto = pp.id
       WHERE v.idVenda = '${id}'
       ORDER BY v.itemVenda;
-    `
-    return this.executaQuery(sql, id)
+    `;
+    return this.executaQuery(sql, id);
   }
 
   criarVenda(novaVenda) {
-    const sql = 'INSERT INTO vendas SET ?'
-    return this.executaQuery(sql, novaVenda)
+    const sql = 'INSERT INTO vendas SET ?';
+    return this.executaQuery(sql, novaVenda);
   }
 
   attStatus(attVenda, id) {
-    const sql = 'UPDATE vendas SET status = ? WHERE idVenda = ?'
-    return this.executaQuery(sql, [attVenda, id])
+    const sql = 'UPDATE vendas SET status = ? WHERE idVenda = ?';
+    return this.executaQuery(sql, [attVenda, id]);
   }
 
   // deletar(id) {
@@ -103,4 +104,4 @@ LEFT JOIN clientes c ON c.id = v.idCliente;`
   // }
 }
 
-module.exports = new VendaModel()
+module.exports = new VendaModel();
