@@ -72,6 +72,8 @@ router.get('/todasVendas', vendaController.buscarTodos);
 
 router.get('/todasVendasPecas', vendaController.buscarVendaPeca);
 
+router.get('/todasVendasHoje', vendaController.buscarVendasHoje);
+
 router.post('/novaVenda', vendaController.newVenda);
 
 router.get('/vendas/:id', vendaController.buscarClientesId);

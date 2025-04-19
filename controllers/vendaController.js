@@ -28,6 +28,19 @@ class VendaController {
     }
   }
 
+  async buscarVendasHoje(req, res) {
+    try {
+      const resposta = await vendaModel.listarVendasHoje();
+      return res.status(200).json(resposta);
+    } catch (erro) {
+      console.error('Erro ao buscar clientes:', erro);
+      return res.status(500).json({
+        sucesso: false,
+        erro: erro.message,
+      });
+    }
+  }
+
   async buscarClientesId(req, res) {
     const { id } = req.params;
 

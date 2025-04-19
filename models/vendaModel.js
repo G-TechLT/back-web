@@ -132,6 +132,12 @@ LEFT JOIN clientes c ON c.id = v.idCliente;`;
     return this.executaQuery(sql);
   }
 
+  listarVendasHoje() {
+    const sql = `  SELECT * 
+      FROM vendas
+      WHERE DATE(dataProposta) = CURDATE()`;
+    return this.executaQuery(sql);
+  }
   // deletar(id) {
   //   const sql = "DELETE FROM atendimentos WHERE id = ?";
   //   return this.executaQuery(sql, id);
