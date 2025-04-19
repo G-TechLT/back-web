@@ -98,6 +98,40 @@ LEFT JOIN clientes c ON c.id = v.idCliente;`;
     return this.executaQuery(sql, [attVenda, id]);
   }
 
+  listarVendaPeca() {
+    const sql = `SELECT 
+      v.id,
+      v.idVenda,
+      v.itemVenda,
+      v.tipoProduto,
+      v.dataProposta,
+      v.dataVenda,
+      v.status,
+      v.marca,
+      v.idProduto,
+      v.quantidade,
+      c.id AS idCliente,
+      c.nome AS nomeCliente,
+      c.cnpj,
+      c.nome_responsavel,
+      c.email,
+      c.telefone,
+      c.endereco,
+      c.cidade,
+      c.estado,
+      c.cep,
+      c.data_criacao,
+      p.Descricao AS descricaoProduto,
+      p.nSeriePlaca AS nSerieEquipamento,
+      p.nSerieSensor AS nSerieSensor,
+      p.valorPeca AS preco
+    FROM vendas v
+    LEFT JOIN pecas p ON p.ID = v.idProduto
+    LEFT JOIN clientes c ON c.id = v.idCliente;
+    `;
+    return this.executaQuery(sql);
+  }
+
   // deletar(id) {
   //   const sql = "DELETE FROM atendimentos WHERE id = ?";
   //   return this.executaQuery(sql, id);

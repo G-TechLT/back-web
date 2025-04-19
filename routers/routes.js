@@ -70,6 +70,8 @@ router.post('/prodPosicionador', prodPosi.novoProd);
 
 router.get('/todasVendas', vendaController.buscarTodos);
 
+router.get('/todasVendasPecas', vendaController.buscarVendaPeca);
+
 router.post('/novaVenda', vendaController.newVenda);
 
 router.get('/vendas/:id', vendaController.buscarClientesId);
