@@ -1,7 +1,6 @@
 const pecasModel = require('../models/pecasModel.js');
 
 class PecasController {
-  // Método para buscar uma peça pelo ID
   async pecasPorItemId(req, res) {
     const { id } = req.params;
 
