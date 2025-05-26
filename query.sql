@@ -101,3 +101,54 @@ CREATE TABLE usuarios (
   perfil ENUM('admin', 'usuario') DEFAULT 'usuario',
   criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE manutencaoServico (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    data_abertura DATETIME NOT NULL,
+    tipo_servico VARCHAR(50) NOT NULL,
+    cliente_id INT,
+    referencia VARCHAR(100),
+    acompanha_laudo BOOLEAN DEFAULT FALSE,
+    anexo_doc TEXT,
+    nf VARCHAR(50),
+    romaneio VARCHAR(50),
+    outros_documentos TEXT,
+    status_atual VARCHAR(50) DEFAULT 'Aberto',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE manutencaoItens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    servico_id INT NOT NULL,
+    descricao VARCHAR(100),
+    modelo VARCHAR(50),
+    numero_serie VARCHAR(50),
+    numero_sensor VARCHAR(50),
+    patrimonio VARCHAR(50),
+    tag VARCHAR(50),
+    acompanha_laudo BOOLEAN DEFAULT FALSE,
+    data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (servico_id) REFERENCES manutencaoServico(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE documentosServico (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    servico_id INT NOT NULL,
+    nome_arquivo VARCHAR(255),
+    caminho_arquivo VARCHAR(255),
+    tipo_documento VARCHAR(50),
+    data_upload TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (servico_id) REFERENCES manutencaoServico(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE statusServico (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    servico_id INT NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    observacoes TEXT,
+    data_status TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (servico_id) REFERENCES manutencaoServico(id) ON DELETE CASCADE
+);
