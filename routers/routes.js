@@ -9,6 +9,8 @@ const pecaServicoController = require('../controllers/pecaServicoController');
 const clienteController = require('../controllers/clienteController');
 const userController = require('../controllers/userController');
 const vendaController = require('../controllers/vendaController');
+const servicoManutencaoController = require('../controllers/servicoManutencaoController');
+const upload = require('../middlewares/upload');
 
 //req = requisição, recebe algo
 //res = resposta, envia algo
@@ -77,5 +79,11 @@ router.get('/todasVendasHoje', vendaController.buscarVendasHoje);
 router.post('/novaVenda', vendaController.newVenda);
 
 router.get('/vendas/:id', vendaController.buscarClientesId);
+
+router.post(
+  '/servicoManutencao',
+  upload.array('anexo_doc'),
+  servicoManutencaoController.criarServico
+);
 
 module.exports = router;

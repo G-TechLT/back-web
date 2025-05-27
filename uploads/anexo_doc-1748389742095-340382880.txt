@@ -1,0 +1,94 @@
+
+function NavItem({ label, icon, active }) {
+  return (
+    <div
+      className={`flex items-center gap-3 px-4 py-2 rounded-md cursor-pointer ${
+        active ? 'bg-zinc-800 text-white' : 'hover:bg-zinc-800 text-gray-400'
+      }`}
+    >
+      <span>{icon}</span>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+function AgentCard({ icon, title, description, activity }) {
+  return (
+    <div className='border border-zinc-700 rounded-lg p-5 hover:border-zinc-500'>
+      <div className='flex items-center gap-4 mb-3'>
+        <div className='text-3xl'>{icon}</div>
+        <div>
+          <h3 className='font-semibold text-lg'>{title}</h3>
+          <p className='text-gray-400 text-sm'>{description}</p>
+        </div>
+      </div>
+      <div className='text-sm text-gray-500'>
+        Last activity <span className='text-white font-medium'>{activity}</span>
+      </div>
+    </div>
+  );
+}
+
+export default function AgentsPage() {
+  return (
+    <div className='flex h-screen bg-black text-white'>
+      {/* Sidebar */}
+      <aside className='w-64 bg-zinc-900 p-6 flex flex-col justify-between'>
+        <div>
+          <div className='mb-10'>
+            <h1 className='text-2xl font-bold'>
+              KOMVOS <br /> <span className='text-sm text-gray-400'>MIND</span>
+            </h1>
+          </div>
+          <nav className='space-y-4'>
+            <NavItem label='Dashboard' icon='📊' />
+            <NavItem label='Agents' icon='🤖' active />
+            <NavItem label='Knowledge' icon='📚' />
+            <NavItem label='Activity' icon='📈' />
+            <NavItem label='Settings' icon='⚙️' />
+          </nav>
+        </div>
+        <div className='text-center text-sm text-gray-500'>
+          &copy; 2025 KOMVOS
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className='flex-1 p-10 overflow-y-auto'>
+        <header className='flex justify-between items-center mb-10'>
+          <h2 className='text-3xl font-bold'>Agents</h2>
+          <button className='border px-4 py-2 rounded-md hover:bg-zinc-800'>
+            + Create agent
+          </button>
+        </header>
+
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+          <AgentCard
+            icon='🔊'
+            title='Mind Support'
+            description='Agent for customer support and ticket management'
+            activity='2 hours ago'
+          />
+          <AgentCard
+            icon='⚙️'
+            title='Mind Sales'
+            description='Agent for lead qualification and sales assistance'
+            activity='3 hours ago'
+          />
+          <AgentCard
+            icon='🔗'
+            title='Mind Ops'
+            description='Agent for task automation and operational insights'
+            activity='5 hours ago'
+          />
+          <AgentCard
+            icon='👤'
+            title='Mind Trainer'
+            description='Agent for employee onboarding and training'
+            activity='1 day ago'
+          />
+        </div>
+      </main>
+    </div>
+  );
+}
