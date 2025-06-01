@@ -13,7 +13,6 @@ class ServicoManuModel {
     });
   }
 
-  // 🧾 Inserir nova O.S.
   inserirServico(data) {
     const sql = `
       INSERT INTO manutencaoServico 
@@ -30,19 +29,16 @@ class ServicoManuModel {
     return this.executaQuery(sql, parametros);
   }
 
-  // 📋 Buscar todas as O.S.
   listarServicos() {
     const sql = `SELECT * FROM manutencaoServico ORDER BY id DESC`;
     return this.executaQuery(sql);
   }
 
-  // 🔍 Buscar O.S. por ID
   buscarPorId(id) {
     const sql = `SELECT * FROM manutencaoServico WHERE id = ?`;
     return this.executaQuery(sql, [id]);
   }
 
-  // ❌ Deletar O.S.
   deletarServico(id) {
     const sql = `DELETE FROM manutencaoServico WHERE id = ?`;
     return this.executaQuery(sql, [id]);

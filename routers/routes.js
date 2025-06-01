@@ -11,6 +11,7 @@ const userController = require('../controllers/userController');
 const vendaController = require('../controllers/vendaController');
 const servicoManutencaoController = require('../controllers/servicoManutencaoController');
 const upload = require('../middlewares/upload');
+const manutencaoItensControlle = require('../controllers/manutencaoItensControlle');
 
 //req = requisição, recebe algo
 //res = resposta, envia algo
@@ -85,5 +86,18 @@ router.post(
   upload.array('anexo_doc'),
   servicoManutencaoController.criarServico
 );
+
+router.post('/manutencao/:id/itensOs', manutencaoItensControlle.inserirItens);
+
+router.get('/manutencao/itens', manutencaoItensControlle.listarTodos);
+
+router.get(
+  '/manutencao/:id/itensOs',
+  manutencaoItensControlle.listarPorServicoId
+);
+
+router.delete('/manutencao/itens/:id', manutencaoItensControlle.deletarItem);
+
+router.put('/manutencao/itens/:id', manutencaoItensControlle.atualizarItem);
 
 module.exports = router;

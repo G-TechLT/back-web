@@ -24,6 +24,15 @@ CREATE TABLE produto_posicionador (
   modelo VARCHAR(100) -- pode ser NULL
 );
 
+CREATE TABLE equipamentos (
+  ID INT PRIMARY KEY,
+  ItemID INT,
+  Descricao VARCHAR(255),
+  Categoria VARCHAR(50),
+  DataCadastro DATETIME,
+  Modelo VARCHAR(50)
+);
+
 
 CREATE TABLE produto_transmissor (
   id INT PRIMARY KEY AUTO_INCREMENT,
