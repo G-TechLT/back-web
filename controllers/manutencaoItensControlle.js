@@ -12,6 +12,7 @@ class ManutencaoItensController {
 
       const dados = itens.map((item) => ({
         servico_id: id,
+        equipamento_id: item.equipamento_id,
         descricao: item.descricao,
         modelo: item.modelo,
         numero_serie: item.numero_serie,

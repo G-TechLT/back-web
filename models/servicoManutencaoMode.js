@@ -43,6 +43,41 @@ class ServicoManuModel {
     const sql = `DELETE FROM manutencaoServico WHERE id = ?`;
     return this.executaQuery(sql, [id]);
   }
+
+  editarServico(data, id) {
+    const sql = `
+    UPDATE manutencaoServico SET
+      data_abertura = ?,
+      tipo_servico = ?,
+      cliente_id = ?,
+      referencia = ?,
+      acompanha_laudo = ?,
+      anexo_doc = ?,
+      nf = ?,
+      romaneio = ?,
+      outros_documentos = ?,
+      status_atual = ?,
+      valor_final = ?
+    WHERE id = ?
+  `;
+
+    const parametros = [
+      data.data_abertura,
+      data.tipo_servico,
+      data.cliente_id,
+      data.referencia || null,
+      data.acompanha_laudo ?? false,
+      data.anexo_doc || null,
+      data.nf || null,
+      data.romaneio || null,
+      data.outros_documentos || null,
+      data.status_atual || 'Aberto',
+      data.valor_final || null,
+      id,
+    ];
+
+    return this.executaQuery(sql, parametros);
+  }
 }
 
 module.exports = new ServicoManuModel();

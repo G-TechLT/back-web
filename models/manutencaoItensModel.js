@@ -16,19 +16,20 @@ class ManutencaoItensModel {
   inserirItens(itens) {
     const sql = `
       INSERT INTO manutencaoItens
-      (servico_id, descricao, modelo, numero_serie, numero_sensor, patrimonio, tag, acompanha_laudo)
+      (servico_id, equipamento_id, descricao, modelo, numero_serie, numero_sensor, patrimonio, tag, acompanha_laudo)
       VALUES ?
     `;
 
     const values = itens.map((item) => [
       item.servico_id,
+      item.equipamento_id || null,
       item.descricao || null,
       item.modelo || null,
       item.numero_serie || null,
       item.numero_sensor || null,
       item.patrimonio || null,
       item.tag || null,
-      item.acompanha_laudo ? 1 : 0,
+      item.acompanha_laudo || null,
     ]);
 
     return this.executaQuery(sql, [values]);

@@ -110,6 +110,51 @@ class ServicoManuController {
       });
     }
   }
+
+  async editarManutencaoServico(req, res) {
+    try {
+      const { id } = req.params;
+      const dados = req.body;
+
+      if (!id || isNaN(id)) {
+        return res.status(400).json({ message: 'ID inválido.' });
+      }
+
+      const camposObrigatorios = [
+        'data_abertura',
+        'tipo_servico',
+        'cliente_id',
+      ];
+
+      for (const campo of camposObrigatorios) {
+        if (!dados[campo] || dados[campo].toString().trim() === '') {
+          return res
+            .status(400)
+            .json({ message: `Campo obrigatório ausente: ${campo}` });
+        }
+      }
+
+      const statusValidos = [
+        'Aberto',
+        'Em Andamento',
+        'Concluído',
+        'Cancelado',
+      ];
+      if (dados.status_atual && !statusValidos.includes(dados.status_atual)) {
+        return res.status(400).json({ message: 'Status inválido.' });
+      }
+
+      const resultado = await servicoManutencaoMode.editarServico(dados, id);
+
+      return res.status(200).json({
+        message: 'Ordem de serviço atualizada com sucesso.',
+        resultado,
+      });
+    } catch (error) {
+      console.error('Erro ao atualizar serviço:', error);
+      return res.status(500).json({ message: 'Erro ao atualizar serviço.' });
+    }
+  }
 }
 
 module.exports = new ServicoManuController();

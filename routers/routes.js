@@ -100,4 +100,9 @@ router.delete('/manutencao/itens/:id', manutencaoItensControlle.deletarItem);
 
 router.put('/manutencao/itens/:id', manutencaoItensControlle.atualizarItem);
 
+router.put(
+  '/servicoManutencao/:id',
+  servicoManutencaoController.editarManutencaoServico
+);
+
 module.exports = router;
