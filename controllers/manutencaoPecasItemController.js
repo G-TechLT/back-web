@@ -14,7 +14,7 @@ class ManutencaoPecasItemController {
           item.item_id &&
           item.peca_id &&
           item.quantidade &&
-          ['instalacao', 'substituicao', 'retirada'].includes(item.acao)
+          ['instalacao', 'substituicao', 'recuperacao'].includes(item.acao)
       );
 
       if (!validacoes) {

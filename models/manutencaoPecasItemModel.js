@@ -16,13 +16,14 @@ class ManutencaoPecasItemModel {
   inserirPecas(itens) {
     const sql = `
       INSERT INTO manutencao_pecas_item
-      (item_id, peca_id, quantidade, acao, observacao)
+      (item_id, peca_id, manutencao_id, quantidade, acao, observacao)
       VALUES ?
     `;
 
     const values = itens.map((item) => [
       item.item_id,
       item.peca_id,
+      item.manutencao_id,
       item.quantidade,
       item.acao,
       item.observacao || null,
