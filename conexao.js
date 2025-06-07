@@ -2,16 +2,15 @@ const mysql = require('mysql2');
 
 // Cria um pool de conexões
 const conexao = mysql.createPool({
-  host: 'caboose.proxy.rlwy.net',
-  port: 40989,
-  user: 'root',
-  password: 'VJbchauvFMCEmBRdfaWINdNAxfQQbJwL',
-  database: 'railway',
-  waitForConnections: true, // Espera se todas as conexões estiverem ocupadas
-  connectionLimit: 10, // Número máximo de conexões abertas ao mesmo tempo
-  queueLimit: 0, // Sem limite de requisições na fila
+  host: 'localhost', // Localhost (ou IP do servidor)
+  port: 3306, // Porta padrão do MySQL
+  user: 'root', // Usuário do banco
+  password: 'Farias!123', // Senha do usuário
+  database: 'local_g_offer', // Nome do banco de dados
+  waitForConnections: true, // Espera caso todas as conexões estejam ocupadas
+  connectionLimit: 10, // Até 10 conexões ao mesmo tempo
+  queueLimit: 0, // 0 = sem limite de requisições na fila
 });
-
 // Testa a conexão
 conexao.getConnection((err, connection) => {
   if (err) {

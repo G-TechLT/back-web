@@ -12,6 +12,7 @@ const vendaController = require('../controllers/vendaController');
 const servicoManutencaoController = require('../controllers/servicoManutencaoController');
 const upload = require('../middlewares/upload');
 const manutencaoItensControlle = require('../controllers/manutencaoItensControlle');
+const manutencaoPecasItemController = require('../controllers/manutencaoPecasItemController');
 
 //req = requisição, recebe algo
 //res = resposta, envia algo
@@ -87,6 +88,13 @@ router.post(
   servicoManutencaoController.criarServico
 );
 
+router.put(
+  '/servicoManutencao/:id',
+  servicoManutencaoController.editarManutencaoServico
+);
+
+router.get('/servicoManutencao', servicoManutencaoController.listarServicos);
+
 router.post('/manutencao/:id/itensOs', manutencaoItensControlle.inserirItens);
 
 router.get('/manutencao/itens', manutencaoItensControlle.listarTodos);
@@ -100,9 +108,16 @@ router.delete('/manutencao/itens/:id', manutencaoItensControlle.deletarItem);
 
 router.put('/manutencao/itens/:id', manutencaoItensControlle.atualizarItem);
 
-router.put(
-  '/servicoManutencao/:id',
-  servicoManutencaoController.editarManutencaoServico
+router.post('/manutencao/pecas-item', manutencaoPecasItemController.inserir);
+
+router.get(
+  '/manutencao/pecas-item/:item_id',
+  manutencaoPecasItemController.listarPorItem
+);
+
+router.delete(
+  '/manutencao/pecas-item/:id',
+  manutencaoPecasItemController.deletar
 );
 
 module.exports = router;

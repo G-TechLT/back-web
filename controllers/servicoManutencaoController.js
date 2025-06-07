@@ -19,7 +19,7 @@ class ServicoManuController {
         data_abertura,
         tipo_servico,
         cliente_id,
-        anexo_doc: null, // campo não mais usado
+        anexo_doc: null,
       });
 
       const servicoId = resultado.insertId;
